@@ -1,9 +1,5 @@
-function raiseNotification(){
-  var title = document.getElementById('notifTitle').value;
-  var content = document.getElementById('notifContent').value;
-
+function raiseNotification(title, content) {
   // FIREFOX
-
   if (window.Notification && Notification.permission !== "granted") {
     Notification.requestPermission(function (status) {
       if (Notification.permission !== status) {
@@ -20,3 +16,16 @@ function raiseNotification(){
 
   return false;
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('notificationForm').onsubmit = function(e) {
+    e.preventDefault();
+    var title = document.getElementById('notifTitle').value;
+    var content = document.getElementById('notifContent').value;
+    
+    raiseNotification(title, content);
+  };
+});
+
+
+
